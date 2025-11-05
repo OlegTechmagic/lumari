@@ -1,16 +1,29 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
+import * as apigateway from 'aws-cdk-lib/aws-apigateway';
 
-export class AwsStack extends cdk.Stack {
+export class LumaryStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const lambdaNames = ['lambda1', 'lambda2', 'lambda3', 'lambda4', 'lambda5'];
+    const lambdas: lambda.Function[] = [];
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'AwsQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    for (const name of lambdaNames) {
+      const fn = new lambda.Function(this, `Lambda${name}`, {
+        runtime: lambda.Runtime.NODEJS_LATEST,
+        handler: `dist/${name}.handler`,
+        code: lambda.Code.fromAsset('handlers'),
+      });
+      lambdas.push(fn);
+    }
+
+    // Optionally create an API Gateway for each Lambda or one that routes to one Lambda
+    // Here we create an API Gateway for the first Lambda as an example
+    const api = new apigateway.LambdaRestApi(this, 'LumaryApiGateway', {
+      handler: lambdas[0],
+      proxy: true,
+    });
   }
 }

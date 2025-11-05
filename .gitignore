@@ -5,19 +5,9 @@ dist
 package-lock.json
 .env
 cdk.out
-./lambdas
 *.js
-!jest.config.js
-node_modules
 .vscode
 .idea
-# CDK asset staging directory
 .cdk.staging
 cdk.out
-*.js
-!jest.config.js
 *.d.ts
-node_modules
-
-# CDK asset staging directory
-.cdk.staging

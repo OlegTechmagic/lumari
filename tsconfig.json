@@ -12,7 +12,8 @@
     "strictPropertyInitialization": false,
     "typeRoots": ["./node_modules/@types"],
     "paths": {
-      "@utils": ["src/utils/index.ts"]
+      "@utils": ["src/utils/index.ts"],
+      "@config": ["./config/index.ts"]
     }
   }
 }

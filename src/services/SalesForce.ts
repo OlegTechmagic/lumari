@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
-  SF_CLIENT_ID,
-  SF_CLIENT_SECRET,
-  SF_PASSWORD,
-  SF_SECURITY_TOKEN,
-  SF_USERNAME,
-} from '@config';
+import conf from '@config';
 import axios from 'axios';
 
 type Query = {
@@ -16,15 +10,28 @@ type Query = {
   method: 'POST' | 'GET';
 };
 
+type Config = Record<
+  'grant_type' | 'client_id' | 'client_secret' | 'username' | 'password',
+  string
+>;
+
 export class SalesForceServive {
-  async getAccessToken() {
-    const params = new URLSearchParams({
+  config: Config;
+
+  constructor(
+    domain: 'abadancingqueen' | 'momentum_ruby_8063_dev_ed' | 'efficiency_enterprise_6328_dev_ed',
+  ) {
+    this.config = {
       grant_type: 'password',
-      client_id: SF_CLIENT_ID,
-      client_secret: SF_CLIENT_SECRET,
-      username: SF_USERNAME,
-      password: SF_PASSWORD + SF_SECURITY_TOKEN,
-    });
+      client_id: conf[`${domain}_SF_CLIENT_ID`],
+      client_secret: (conf as any)[`${domain}_SF_CLIENT_SECRET`],
+      username: conf[`${domain}_SF_USERNAME`],
+      password: conf[`${domain}_SF_PASSWORD`] + conf[`${domain}_SF_SECURITY_TOKEN`],
+    };
+  }
+
+  async getAccessToken() {
+    const params = new URLSearchParams(this.config);
 
     const res = await axios.post('https://login.salesforce.com/services/oauth2/token', params);
 

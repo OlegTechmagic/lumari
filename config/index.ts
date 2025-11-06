@@ -38,3 +38,28 @@ export const efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN =
   process.env.efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN ?? '';
 export const efficiency_enterprise_6328_dev_ed_SF_VERSION =
   process.env.efficiency_enterprise_6328_dev_ed_SF_VERSION ?? 'v63.0';
+
+export default {
+  NODE_ENV,
+  PIPELINE_BRANCH,
+  HITHUB_REPO,
+  PORT,
+  abadancingqueen_SF_CLIENT_ID,
+  abadancingqueen_SF_CLIENT_SECRET,
+  abadancingqueen_SF_USERNAME,
+  abadancingqueen_SF_PASSWORD,
+  abadancingqueen_SF_SECURITY_TOKEN,
+  abadancingqueen_SF_VERSION,
+  momentum_ruby_8063_dev_ed_SF_CLIENT_ID,
+  momentum_ruby_8063_dev_ed_SF_CLIENT_SECRET,
+  momentum_ruby_8063_dev_ed_SF_USERNAME,
+  momentum_ruby_8063_dev_ed_SF_PASSWORD,
+  momentum_ruby_8063_dev_ed_SF_SECURITY_TOKEN,
+  momentum_ruby_8063_dev_ed_SF_VERSION,
+  efficiency_enterprise_6328_dev_ed_SF_CLIENT_ID,
+  efficiency_enterprise_6328_dev_ed_SF_CLIENT_SECRET,
+  efficiency_enterprise_6328_dev_ed_SF_USERNAME,
+  efficiency_enterprise_6328_dev_ed_SF_PASSWORD,
+  efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN,
+  efficiency_enterprise_6328_dev_ed_SF_VERSION,
+};

@@ -1,14 +1,6 @@
 import 'tsconfig-paths/register';
 
-import { APIGatewayProxyEvent, APIGatewayProxyResult, Context } from 'aws-lambda';
+import { patientRoute } from '@routes';
+import { handlerWrapper } from '@utils';
 
-export const handler = async (
-  event: APIGatewayProxyEvent,
-  context: Context,
-): Promise<APIGatewayProxyResult> => {
-  // Respond with a basic JSON message
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: 'Mock patient handler response' }),
-  };
-};
+export const handler = handlerWrapper(patientRoute);

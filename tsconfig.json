@@ -13,6 +13,7 @@
     "typeRoots": ["./node_modules/@types"],
     "paths": {
       "@utils": ["src/utils/index.ts"],
+      "@routes": ["src/routes/index.ts"],
       "@config": ["./config/index.ts"]
     }
   }

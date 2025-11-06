@@ -1,15 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 
-export type HandlerFunction = (params: {
-  method: string;
-  headers: Record<string, string | undefined>;
-  query: Record<string, string | undefined> | null;
-  pathParameters: Record<string, string | undefined> | null;
-  body: any;
-}) => Promise<{ statusCode: number; body: any }>;
+import { Router } from './types';
 
-export const handlerWrapper = (handler: HandlerFunction) => {
+export const handlerWrapper = (handler: Router) => {
   return async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
       const { httpMethod, headers, queryStringParameters, pathParameters, body } = event;

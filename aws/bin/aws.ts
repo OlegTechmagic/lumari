@@ -2,11 +2,11 @@
 
 import 'tsconfig-paths/register';
 
-import { CONFIG } from '@config';
+import { NODE_ENV } from '@config';
 import * as cdk from 'aws-cdk-lib';
 
 import { Pipeline } from '../lib/pipeline';
 
 const app = new cdk.App();
-new Pipeline(app, `Lumari-${CONFIG.NODE_ENV}`, {});
+new Pipeline(app, `Lumari-${NODE_ENV}`, {});
 app.synth();

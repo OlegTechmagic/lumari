@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CONFIG } from '@config';
+import { PORT } from '@config';
 import { appointmentRoute, documentRoute, patientRoute, practitionerRoute } from '@routes';
 import http from 'http';
 import { URL } from 'url';
@@ -54,7 +54,6 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-const PORT = CONFIG.PORT;
 const HOST = 'localhost';
 
 server.listen(PORT, HOST, () => {

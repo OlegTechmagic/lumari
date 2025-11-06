@@ -1,18 +1,28 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import * as fs from 'fs';
+import * as path from 'path';
 
-import { LAMBDAS } from '../../config';
 import { ApiGateway } from './apiGateway';
 import { LambdaConstruct } from './lambda';
 
 export class LumaryStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+
+    const files = fs.readdirSync(path.join(__dirname, '../../dist'));
+
+    const LAMBDAS = files
+      .filter((file) => file.endsWith('.js'))
+      .map((file) => path.basename(file).replace(/\.[^.]+$/, ''));
+
+    console.log('LAMBDAS', LAMBDAS);
+
     const lambdaConstruct = new LambdaConstruct(this, 'LumaryLambdas', LAMBDAS);
     const apiGateway = new ApiGateway(this, 'LumaryApiGateway');
 
-    lambdaConstruct.lambdas.forEach((lambda) => {
-      apiGateway.setRoute(lambda.functionName, lambda);
+    lambdaConstruct.lambdas.forEach(({ name, lambda }) => {
+      apiGateway.setRoute(name, lambda);
     });
   }
 }

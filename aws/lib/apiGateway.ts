@@ -1,4 +1,3 @@
-import { HttpMethod } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { CONFIG } from '@config';
 import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
@@ -20,13 +19,13 @@ export class ApiGateway extends Construct {
   }
 
   public setRoute(path: string, handler: NodejsFunction) {
+    console.log('PATH', path);
     const integration = new LambdaIntegration(handler, {
       proxy: true,
       allowTestInvoke: false,
     });
 
     const resource = this.restApi.root.addResource(path);
-    resource.addMethod(HttpMethod.ANY, integration);
-    resource.addProxy({ defaultIntegration: integration, anyMethod: true });
+    resource.addMethod('ANY', integration);
   }
 }

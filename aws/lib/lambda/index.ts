@@ -5,17 +5,17 @@ import { CONFIG } from '../../../config';
 import { LambdaTemplate } from './lambdaTemplate';
 
 export class LambdaConstruct extends Construct {
-  public readonly lambdas: NodejsFunction[];
+  public readonly lambdas: { name: string; lambda: NodejsFunction }[];
 
   constructor(scope: Construct, id: string, functions: string[]) {
     super(scope, id);
 
-    this.lambdas = functions.map((fn) =>
-      LambdaTemplate(this, fn, {
+    this.lambdas = functions.map((fn) => ({
+      name: fn,
+      lambda: LambdaTemplate(this, fn + `-${CONFIG.NODE_ENV}`, {
         functionName: 'lumary-' + fn + `-${CONFIG.NODE_ENV}`,
         entry: fn,
-        handler: 'handler',
       }),
-    );
+    }));
   }
 }

@@ -1,7 +1,7 @@
+import { NODE_ENV } from '@config';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 
-import { CONFIG } from '../../../config';
 import { LambdaTemplate } from './lambdaTemplate';
 
 export class LambdaConstruct extends Construct {
@@ -12,8 +12,8 @@ export class LambdaConstruct extends Construct {
 
     this.lambdas = functions.map((fn) => ({
       name: fn,
-      lambda: LambdaTemplate(this, fn + `-${CONFIG.NODE_ENV}`, {
-        functionName: 'lumary-' + fn + `-${CONFIG.NODE_ENV}`,
+      lambda: LambdaTemplate(this, fn + `-${NODE_ENV}`, {
+        functionName: 'lumary-' + fn + `-${NODE_ENV}`,
         entry: fn,
       }),
     }));

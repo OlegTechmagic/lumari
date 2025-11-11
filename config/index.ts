@@ -2,10 +2,13 @@ import 'dotenv/config';
 
 export * from './constants';
 
+type LogLevel = 'INFO' | 'WARN' | 'ERROR';
+
 export const NODE_ENV = process.env.NODE_ENV ?? 'development';
 export const PIPELINE_BRANCH = process.env.PIPELINE_BRANCH ?? 'development';
 export const HITHUB_REPO = process.env.HITHUB_REPO ?? '';
 export const PORT = +(process.env.PORT || 3000);
+export const LOG_LEVEL: LogLevel = (process.env.LOG_LEVEL as LogLevel) ?? 'INFO';
 
 export const abadancingqueen_SF_CLIENT_ID = process.env.abadancingqueen_SF_CLIENT_ID ?? '';
 export const abadancingqueen_SF_CLIENT_SECRET = process.env.abadancingqueen_SF_CLIENT_SECRET ?? '';

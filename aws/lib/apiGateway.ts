@@ -1,9 +1,7 @@
-import { CONFIG } from '@config';
+import { NODE_ENV } from '@config';
 import { LambdaIntegration, RestApi } from 'aws-cdk-lib/aws-apigateway';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
-
-const { NODE_ENV } = CONFIG;
 
 export class ApiGateway extends Construct {
   restApi: RestApi;

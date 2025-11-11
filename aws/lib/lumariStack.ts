@@ -5,6 +5,7 @@ import * as path from 'path';
 
 import { ApiGateway } from './apiGateway';
 import { LambdaConstruct } from './lambda';
+import { LoggerConstruct } from './logs';
 
 export class LumaryStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -20,9 +21,12 @@ export class LumaryStack extends cdk.Stack {
 
     const lambdaConstruct = new LambdaConstruct(this, 'LumaryLambdas', LAMBDAS);
     const apiGateway = new ApiGateway(this, 'LumaryApiGateway');
+    const loggerConstruct = new LoggerConstruct(this, 'LumaryLogger');
+    loggerConstruct.grantPermissions();
 
     lambdaConstruct.lambdas.forEach(({ name, lambda }) => {
-      apiGateway.setRoute(name, lambda);
+      loggerConstruct.constructLogGroup(name);
+      return apiGateway.setRoute(name, lambda);
     });
   }
 }

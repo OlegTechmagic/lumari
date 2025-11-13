@@ -27,7 +27,7 @@ export class SynthStep extends CodeBuildStep {
   constructor(branch: string) {
     super('LumariSynth', {
       input: CodePipelineSource.gitHub(HITHUB_REPO, branch, {
-        authentication: cdk.SecretValue.secretsManager('github-token'),
+        authentication: cdk.SecretValue.secretsManager('lumary-github-token'),
       }),
       installCommands: ['npm i -g yarn', 'npm i -g aws-cdk'],
 

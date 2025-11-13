@@ -11,3 +11,6 @@ cdk.out
 .cdk.staging
 cdk.out
 *.d.ts
+server.key
+server.crt
+.DS_Store

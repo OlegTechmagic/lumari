@@ -17,6 +17,7 @@
       "@services": ["src/services/index.ts"],
       "@providers": ["src/providers/index.ts"],
       "@types": ["./global.types.ts"],
+      "@controllers": ["./src/controllers/index.ts"],
       "@config": ["./config/index.ts"]
     }
   }

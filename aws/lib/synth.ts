@@ -1,6 +1,7 @@
 import {
   abadancingqueen_Consumer_Key,
   abadancingqueen_SF_USERNAME,
+  AWS_REGION,
   efficiency_enterprise_6328_dev_ed_Consumer_Key,
   efficiency_enterprise_6328_dev_ed_SF_USERNAME,
   HITHUB_REPO,
@@ -24,6 +25,10 @@ export class SynthStep extends CodeBuildStep {
         environmentVariables: {
           NODE_ENV: {
             value: NODE_ENV,
+            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+          },
+          AWS_REGION: {
+            value: AWS_REGION,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
           HITHUB_REPO: {

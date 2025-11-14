@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import conf, { SALESFORCE_LOGIN_URL } from '@config';
+import conf, { LOCALHOST, SALESFORCE_LOGIN_URL } from '@config';
+import { SFOrg } from '@types';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+
+import { AwsProvider } from './AwsProvider';
 
 type Query = {
   body?: { [key: string]: any };
@@ -16,21 +19,40 @@ type Config = Record<'iss' | 'sub' | 'aud' | 'exp', string | number>;
 export class SalesForceProvider {
   config: Config;
   privateKey: string;
+  sforg: SFOrg;
 
-  constructor(
-    domain: 'abadancingqueen' | 'momentum_ruby_8063_dev_ed' | 'efficiency_enterprise_6328_dev_ed',
-  ) {
-    this.privateKey = conf[`${domain}_SERTIFICCATE_KEY`].replace(/\\n/g, '\n');
-
+  constructor(sforg: SFOrg) {
+    this.sforg = sforg;
     this.config = {
-      iss: conf[`${domain}_Consumer_Key`],
-      sub: conf[`${domain}_SF_USERNAME`],
+      iss: conf[`${sforg}_Consumer_Key`],
+      sub: conf[`${sforg}_SF_USERNAME`],
       aud: SALESFORCE_LOGIN_URL,
       exp: Math.floor(Date.now() / 1000) + 3 * 60,
     };
   }
 
+  async initKey() {
+    if (LOCALHOST) {
+      this.privateKey = conf[`${this.sforg}_SERTIFICATE_KEY`].replace(/\\n/g, '\n');
+      return;
+    }
+    const keyName = conf[`${this.sforg}_KEY_SECRET_NAME`];
+    const awsProvider = new AwsProvider('us-east-1');
+    try {
+      const key = await awsProvider.getSecretValue(keyName);
+      if (!key) throw new Error(`No key found for secret name: ${keyName}`);
+      this.privateKey = key;
+    } catch (error) {
+      console.error(`Error retrieving secret key for ${this.sforg}:`, error);
+      throw error;
+    }
+  }
+
   async getAccessToken(): Promise<{ access_token: string; instance_url: string }> {
+    if (!this.privateKey) {
+      await this.initKey();
+    }
+
     const jwtToken = jwt.sign(this.config, this.privateKey, { algorithm: 'RS256' });
 
     const params = new URLSearchParams({

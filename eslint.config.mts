@@ -50,10 +50,13 @@ export default defineConfig([
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
-          argsIgnorePattern: '_[a-z-A-Z]',
-          caughtErrorsIgnorePattern: '_[a-z-A-Z]',
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+          // argsIgnorePattern: '_[a-z-A-Z]',
+          // caughtErrorsIgnorePattern: '_[a-z-A-Z]',
           destructuredArrayIgnorePattern: '_[a-z-A-Z]',
-          varsIgnorePattern: '_[a-z-A-Z]',
+          // varsIgnorePattern: '_[a-z-A-Z]',
           // ignoreRestSiblings: true,
         },
       ],

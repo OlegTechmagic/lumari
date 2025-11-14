@@ -1,11 +1,14 @@
 import { AppointmentController } from '@controllers';
+import { GetAppointemntRequest } from '@types';
 import { Router } from '@utils';
 
-export const appointmentRoute: Router = async (params) => {
+export const appointmentRoute: Router = async (request) => {
   const appointmentController = new AppointmentController();
   try {
-    if (params.method === 'GET') {
-      const body = await appointmentController.getAppintmentDetails('params.query.appointmentId!');
+    if (request.method === 'GET') {
+      const body = await appointmentController.getAppintmentDetails(
+        request.pathParameters as GetAppointemntRequest,
+      );
       return { statusCode: 200, body };
     }
     return { statusCode: 404, body: { error: 'Method Not Found' } };

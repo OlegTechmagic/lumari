@@ -1,9 +1,10 @@
 import { AppointmentService } from '@services';
+import { GetAppointemntRequest } from '@types';
 
 export class AppointmentController {
   private appointmentService = new AppointmentService();
 
-  getAppintmentDetails(appointment: string) {
-    return this.appointmentService.getAppointmentDetails(appointment);
+  getAppintmentDetails(request: GetAppointemntRequest) {
+    return this.appointmentService.getAppointmentDetails(request);
   }
 }

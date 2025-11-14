@@ -1,23 +1,11 @@
 import {
-  abadancingqueen_SF_CLIENT_ID,
-  abadancingqueen_SF_CLIENT_SECRET,
-  abadancingqueen_SF_PASSWORD,
-  abadancingqueen_SF_SECURITY_TOKEN,
+  abadancingqueen_Consumer_Key,
   abadancingqueen_SF_USERNAME,
-  abadancingqueen_SF_VERSION,
-  efficiency_enterprise_6328_dev_ed_SF_CLIENT_ID,
-  efficiency_enterprise_6328_dev_ed_SF_CLIENT_SECRET,
-  efficiency_enterprise_6328_dev_ed_SF_PASSWORD,
-  efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN,
+  efficiency_enterprise_6328_dev_ed_Consumer_Key,
   efficiency_enterprise_6328_dev_ed_SF_USERNAME,
-  efficiency_enterprise_6328_dev_ed_SF_VERSION,
   HITHUB_REPO,
-  momentum_ruby_8063_dev_ed_SF_CLIENT_ID,
-  momentum_ruby_8063_dev_ed_SF_CLIENT_SECRET,
-  momentum_ruby_8063_dev_ed_SF_PASSWORD,
-  momentum_ruby_8063_dev_ed_SF_SECURITY_TOKEN,
+  momentum_ruby_8063_dev_ed_Consumer_Key,
   momentum_ruby_8063_dev_ed_SF_USERNAME,
-  momentum_ruby_8063_dev_ed_SF_VERSION,
   NODE_ENV,
 } from '@config';
 import * as cdk from 'aws-cdk-lib';
@@ -38,80 +26,51 @@ export class SynthStep extends CodeBuildStep {
             value: NODE_ENV,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
+          HITHUB_REPO: {
+            value: HITHUB_REPO,
+            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+          },
           PIPELINE_BRANCH: {
             value: branch,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          abadancingqueen_SF_CLIENT_ID: {
-            value: abadancingqueen_SF_CLIENT_ID,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          abadancingqueen_SF_CLIENT_SECRET: {
-            value: abadancingqueen_SF_CLIENT_SECRET,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          abadancingqueen_SF_PASSWORD: {
-            value: abadancingqueen_SF_PASSWORD,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          abadancingqueen_SF_SECURITY_TOKEN: {
-            value: abadancingqueen_SF_SECURITY_TOKEN,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
+
           abadancingqueen_SF_USERNAME: {
             value: abadancingqueen_SF_USERNAME,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          abadancingqueen_SF_VERSION: {
-            value: abadancingqueen_SF_VERSION,
+          abadancingqueen_Consumer_Key: {
+            value: abadancingqueen_Consumer_Key,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          efficiency_enterprise_6328_dev_ed_SF_CLIENT_ID: {
-            value: efficiency_enterprise_6328_dev_ed_SF_CLIENT_ID,
+          abadancingqueen_KEY_SECRET_NAME: {
+            value: `lumary_api_abadancingqueen_server_key_${NODE_ENV}`,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          efficiency_enterprise_6328_dev_ed_SF_CLIENT_SECRET: {
-            value: efficiency_enterprise_6328_dev_ed_SF_CLIENT_SECRET,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          efficiency_enterprise_6328_dev_ed_SF_PASSWORD: {
-            value: efficiency_enterprise_6328_dev_ed_SF_PASSWORD,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN: {
-            value: efficiency_enterprise_6328_dev_ed_SF_SECURITY_TOKEN,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
+
           efficiency_enterprise_6328_dev_ed_SF_USERNAME: {
             value: efficiency_enterprise_6328_dev_ed_SF_USERNAME,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          efficiency_enterprise_6328_dev_ed_SF_VERSION: {
-            value: efficiency_enterprise_6328_dev_ed_SF_VERSION,
+          efficiency_enterprise_6328_dev_ed_Consumer_Key: {
+            value: efficiency_enterprise_6328_dev_ed_Consumer_Key,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          momentum_ruby_8063_dev_ed_SF_CLIENT_ID: {
-            value: momentum_ruby_8063_dev_ed_SF_CLIENT_ID,
+          efficiency_enterprise_6328_dev_ed_KEY_SECRET_NAME: {
+            value: `lumary_api_efficiency_enterprise_6328_dev_ed_server_key_${NODE_ENV}`,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          momentum_ruby_8063_dev_ed_SF_CLIENT_SECRET: {
-            value: momentum_ruby_8063_dev_ed_SF_CLIENT_SECRET,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          momentum_ruby_8063_dev_ed_SF_PASSWORD: {
-            value: momentum_ruby_8063_dev_ed_SF_PASSWORD,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
-          momentum_ruby_8063_dev_ed_SF_SECURITY_TOKEN: {
-            value: momentum_ruby_8063_dev_ed_SF_SECURITY_TOKEN,
-            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
-          },
+
           momentum_ruby_8063_dev_ed_SF_USERNAME: {
             value: momentum_ruby_8063_dev_ed_SF_USERNAME,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
-          momentum_ruby_8063_dev_ed_SF_VERSION: {
-            value: momentum_ruby_8063_dev_ed_SF_VERSION,
+          momentum_ruby_8063_dev_ed_Consumer_Key: {
+            value: momentum_ruby_8063_dev_ed_Consumer_Key,
+            type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
+          },
+          momentum_ruby_8063_dev_ed_KEY_SECRET_NAME: {
+            value: `lumary_api_momentum_ruby_8063_dev_ed_server_key_${NODE_ENV}`,
             type: cdk.aws_codebuild.BuildEnvironmentVariableType.PLAINTEXT,
           },
         },

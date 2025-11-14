@@ -13,7 +13,7 @@ type Query = {
 
 type Config = Record<'iss' | 'sub' | 'aud' | 'exp', string | number>;
 
-export class SalesForceServive {
+export class SalesForceProvider {
   config: Config;
   privateKey: string;
 
@@ -30,9 +30,7 @@ export class SalesForceServive {
     };
   }
 
-  async getAccessToken() {
-    console.log('Reading private key from:', this.privateKey, this.config);
-
+  async getAccessToken(): Promise<{ access_token: string; instance_url: string }> {
     const jwtToken = jwt.sign(this.config, this.privateKey, { algorithm: 'RS256' });
 
     const params = new URLSearchParams({
@@ -41,18 +39,11 @@ export class SalesForceServive {
     });
     const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
 
-    try {
-      const response = await axios.post(`${SALESFORCE_LOGIN_URL}/services/oauth2/token`, params, {
+    return axios
+      .post(`${SALESFORCE_LOGIN_URL}/services/oauth2/token`, params, {
         headers,
-      });
-
-      console.log('✅ Access Token:', response.data.access_token);
-      console.log('🌐 Instance URL:', response.data.instance_url);
-      return response.data;
-    } catch (error: any) {
-      console.error('❌ Failed to get access token:');
-      console.error(error.response?.data || error.message);
-    }
+      })
+      .then((res) => res.data);
   }
 
   async query(data: Query) {

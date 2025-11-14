@@ -12,8 +12,7 @@ export const LOG_LEVEL: LogLevel = (process.env.LOG_LEVEL as LogLevel) ?? 'INFO'
 export const SALESFORCE_LOGIN_URL =
   process.env.SALESFORCE_LOGIN_URL ?? 'https://login.salesforce.com';
 
-export const efficiency_enterprise_6328_dev_ed_SF_VERSION =
-  process.env.efficiency_enterprise_6328_dev_ed_SF_VERSION ?? 'v63.0';
+export const SF_VERSION = process.env.SF_VERSION ?? 'v63.0';
 
 export const abadancingqueen_Consumer_Key = process.env.abadancingqueen_Consumer_Key ?? '';
 export const abadancingqueen_SERTIFICCATE_KEY = process.env.abadancingqueen_SERTIFICCATE_KEY ?? '';
@@ -32,23 +31,27 @@ export const momentum_ruby_8063_dev_ed_SERTIFICCATE_KEY =
   process.env.abadancingqueen_SERTIFICCATE_KEY ?? '';
 export const momentum_ruby_8063_dev_ed_SF_USERNAME = process.env.abadancingqueen_SF_USERNAME ?? '';
 
+export const LOCALHOST = process.env.LOCALHOST ?? false;
+
 export default {
   NODE_ENV,
   PIPELINE_BRANCH,
   HITHUB_REPO,
   PORT,
+  SF_VERSION,
 
   abadancingqueen_SF_USERNAME,
-
-  momentum_ruby_8063_dev_ed_SF_USERNAME,
-  efficiency_enterprise_6328_dev_ed_SF_USERNAME,
-  efficiency_enterprise_6328_dev_ed_SF_VERSION,
-
   abadancingqueen_Consumer_Key,
   abadancingqueen_SERTIFICCATE_KEY,
+
+  momentum_ruby_8063_dev_ed_SF_USERNAME,
   momentum_ruby_8063_dev_ed_Consumer_Key,
   momentum_ruby_8063_dev_ed_SERTIFICCATE_KEY,
+
+  efficiency_enterprise_6328_dev_ed_SF_USERNAME,
   efficiency_enterprise_6328_dev_ed_Consumer_Key,
   efficiency_enterprise_6328_dev_ed_SERTIFICCATE_KEY,
   SALESFORCE_LOGIN_URL,
+
+  LOCALHOST,
 };
